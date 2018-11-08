@@ -25,7 +25,6 @@ function love.load(arg)
   require "scripts/Components/LevelManager"
   
   -- GAME DATA
-  
   require "data"
   
   -- LOAD FONTS

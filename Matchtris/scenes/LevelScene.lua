@@ -7,6 +7,7 @@ function LevelScene:new()
   -- GAME OBJECTS
   
   self.levelManager = GameObject({LevelManager()},Transform())
+  self.barManager = GameObject({BarScript()},Transform(), SpriteRenderer(barPath))
   
   -- UI
   

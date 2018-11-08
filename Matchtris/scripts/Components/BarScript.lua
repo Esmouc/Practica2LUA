@@ -12,7 +12,7 @@ function BarScript:Change(Mtch, gameobject)
   if Mtch then
     self.streak = self.streak + 1
   else
-    self.streak = 0
+    self.streak =self.streak - 1
   end
   if self.streak == self.max then
     --score + 5000

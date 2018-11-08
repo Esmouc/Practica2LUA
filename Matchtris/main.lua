@@ -31,7 +31,7 @@ function love.load(arg)
   -- LOAD FONTS
   
   -- LOAD SCENES
-  levelScene = LevelScene()
+  currentScene = LevelScene()
 
   -- SETTING GAME STATE
   gameState = GameStates.gameplay
@@ -40,16 +40,12 @@ end
 
 function love.update(dt)
   
-  if (gameState == GameStates.gameplay) then 
-    levelScene:update(dt)
-  end
+  currentScene:update(dt)
 
 end
 
 function love.draw()
  
-  if (gameState == GameStates.gameplay) then 
-    levelScene:draw()
-  end
- 
+  currentScene:draw()
+  
 end

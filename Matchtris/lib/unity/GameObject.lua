@@ -17,3 +17,11 @@ function GameObject:draw()
     self.spriteRenderer:draw(self)
   end
 end
+
+function GameObject:destroy()
+  for i,v in ipairs(currentScene.lObjects) do
+    if v == self then
+      table.remove(currentScene.lObjects, i)
+    end
+  end
+end

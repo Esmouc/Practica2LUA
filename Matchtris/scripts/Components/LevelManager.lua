@@ -2,6 +2,7 @@ LevelManager = Object:extend()
 
 function LevelManager:new()
   self.grid = {{}}
+  self.time = 0.5
   self:InitGrid()
 end
 

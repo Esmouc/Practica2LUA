@@ -1,6 +1,9 @@
 w = love.graphics.getWidth()
 h = love.graphics.getHeight()
 
+-- DATA
+fallTime = 1.0
+
 -- GRID
 
 gridCols = 10

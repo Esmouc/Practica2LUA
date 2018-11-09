@@ -2,13 +2,23 @@ LevelManager = Object:extend()
 
 function LevelManager:new()
   self.grid = {{}}
-  self.time = 0.5
+  self.time = fallTime
+  self.timer = 0
+  self.tetromino = nil
   self:InitGrid()
 end
 
 function LevelManager:update(dt, gameobject)
   
-  currentScene.playerScore.value = currentScene.playerScore.value + 100
+  if self.tetromino ~= nil then
+  
+    self.timer = self.timer + dt
+    
+    if self.timer >= self.time then
+      self.tetromino:MovePieceDown()
+      self.timer = 0
+    end
+  end
   
 end
 
@@ -19,4 +29,8 @@ function LevelManager:InitGrid()
       table.insert(t,nil)
     end  
   end
+end
+
+function LevelManager:AddTetromino(tetromino)
+  self.tetromino = tetromino
 end

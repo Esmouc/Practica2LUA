@@ -1,7 +1,7 @@
 GameObject = Object:extend()
 
 function GameObject:new(components, transform, spriteRenderer)
-    self.transform = transform or Transform.new()
+    self.transform = transform or Transform()
     self.spriteRenderer = spriteRenderer or nil
     self.components = components
 end

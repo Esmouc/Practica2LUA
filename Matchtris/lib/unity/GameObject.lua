@@ -25,3 +25,12 @@ function GameObject:destroy()
     end
   end
 end
+
+function GameObject:GetComponent(componentType)
+  for _,v in pairs (self.components) do
+    if v:is(componentType) then
+      return v
+    end
+  end
+  return nil
+end

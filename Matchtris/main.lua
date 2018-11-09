@@ -5,9 +5,12 @@ function love.load(arg)
   
    if arg[#arg] == "-debug" then require("mobdebug").start() end -- Enable the debugging with ZeroBrane Studio
    
+   math.randomseed(os.time())
+   
   --LIBRARIES
   Object = require "lib/object"
   require "lib/vector"
+  require "lib/Utils"
   
   -- SCENES
   require "scenes/LevelScene"
@@ -33,7 +36,9 @@ function love.load(arg)
   -- LOAD FONTS
   
   -- LOAD SCENES
+  
   currentScene = LevelScene()
+  currentScene:Load()
 
   -- SETTING GAME STATE
   gameState = GameStates.gameplay

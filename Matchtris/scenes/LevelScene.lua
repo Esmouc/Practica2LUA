@@ -1,15 +1,11 @@
 LevelScene = Object:extend()
 
 function LevelScene:new()
-  
   self.lObjects = {}
-  
 end
 
 function LevelScene:Load()
-  
   self.lObjects = {}
-  
   -- GAME OBJECTS
 
   self.barManager = GameObject({BarScript()},Transform(), SpriteRenderer(barPath))

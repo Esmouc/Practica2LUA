@@ -11,11 +11,11 @@ function LevelScene:Load()
   self.lObjects = {}
   
   -- GAME OBJECTS
-  
-  self.levelManager = GameObject({LevelManager()},Transform())
+
   self.barManager = GameObject({BarScript()},Transform(), SpriteRenderer(barPath))
   self.background = GameObject({},Transform(w/2,h/2), SpriteRenderer(bgPath))
   self.foreGround = GameObject({},Transform(w/2,h/2), SpriteRenderer(fgPath))
+  self.levelManager = GameObject({LevelManager()},Transform())
   
   -- UI
   
@@ -23,13 +23,12 @@ function LevelScene:Load()
   
   -- INSERTAMOS LOS OBJETOS A LA ESCENA
   
-  table.insert (self.lObjects, self.levelManager)
   table.insert (self.lObjects, self.background)
   table.insert (self.lObjects, self.playerScore)
   table.insert (self.lObjects, self.foreGround)
+  table.insert (self.lObjects, self.levelManager)
   
-  self.tetromino = GameObject({TetrominoScript(true)},Transform())
-  table.insert (self.lObjects, self.tetromino)
+  self.levelManager:GetComponent(LevelManager):TetrominoSpawn()
   
 end
 

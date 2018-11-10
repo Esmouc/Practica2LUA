@@ -8,8 +8,9 @@ function TetrominoScript:new(random, tetrominoType)
     self.tetrominoType = tetrominoType
   end
   
-  self.grid = tGrids[self.tetrominoType]  
+  self.grid = {}
   
+  self:InitGrid()
   self:CreateTetromino()
   self:InstantiateTetromino()
   
@@ -17,6 +18,16 @@ end
 
 function TetrominoScript:update(dt, gameobject)
 
+end
+
+function TetrominoScript:InitGrid()
+ for x,v in ipairs(tGrids[self.tetrominoType]) do
+    t = {}
+    for y,r in ipairs(v) do
+      table.insert(t, r)
+    end
+    table.insert(self.grid, t)
+  end
 end
 
 function TetrominoScript:CreateTetromino()
@@ -36,19 +47,21 @@ function TetrominoScript:CreateTetromino()
 end
 
 function TetrominoScript:InstantiateTetromino()
-  currentScene.levelManager:GetComponent(LevelManager):AddTetromino(self)
   for r,v in ipairs(self.grid) do
     for c,t in ipairs(v) do
       if t ~= 0 then
         table.insert(currentScene.lObjects, self.grid[r][c])
+        currentScene.foreGround:destroy()
+        table.insert(currentScene.lObjects, currentScene.foreGround)
         ps = self.grid[r][c]:GetComponent(PieceScript)
         ps.gridRow = r
         ps.gridCol = c + gridCols/2 - 1
-        self.grid[r][c].transform.position.y = ps.gridRow * pixelHeight
-        self.grid[r][c].transform.position.x = ps.gridCol * pixelWidth
+        self.grid[r][c].transform.position.y = (h/2 - currentScene.background.spriteRenderer.origin.y-1.5*pixelHeight) + (r-1) * pixelHeight
+        self.grid[r][c].transform.position.x = w/2 - pixelWidth * 0.5 + (c-1) * pixelWidth
       end
     end
   end
+  currentScene.levelManager:GetComponent(LevelManager):AddTetromino(self)
 end
 
 function TetrominoScript:MovePieceDown()
@@ -57,7 +70,31 @@ function TetrominoScript:MovePieceDown()
       if t ~= 0 then
         ps = self.grid[r][c]:GetComponent(PieceScript)
         ps.gridRow = ps.gridRow + 1
-        self.grid[r][c].transform.position.y = ps.gridRow * pixelHeight
+        self.grid[r][c].transform.position.y = self.grid[r][c].transform.position.y + pixelHeight
+      end
+    end
+  end
+end
+
+function TetrominoScript:MovePieceLeft()
+  for r,v in ipairs(self.grid) do
+    for c,t in ipairs(v) do
+      if t ~= 0 then
+        ps = self.grid[r][c]:GetComponent(PieceScript)
+        ps.gridCol = ps.gridCol - 1
+        self.grid[r][c].transform.position.x = self.grid[r][c].transform.position.x - pixelWidth
+      end
+    end
+  end
+end
+
+function TetrominoScript:MovePieceRight()
+  for r,v in ipairs(self.grid) do
+    for c,t in ipairs(v) do
+      if t ~= 0 then
+        ps = self.grid[r][c]:GetComponent(PieceScript)
+        ps.gridCol = ps.gridCol + 1
+        self.grid[r][c].transform.position.x = self.grid[r][c].transform.position.x + pixelWidth
       end
     end
   end

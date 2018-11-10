@@ -3,6 +3,7 @@ h = love.graphics.getHeight()
 
 -- DATA
 fallTime = 1.0
+scrollTime = 0.1
 
 -- GRID
 

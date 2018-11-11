@@ -7,16 +7,16 @@ function PieceScript:new(color)
   self.gridCol = 0
   self.stacked = false
   self.moving = false
+  self.stackedBrothers = {self}
 end
 
 function PieceScript:update(dt, gameobject)
-  
+
 end
 
 function PieceScript:MoveDown()
   if self.stacked == true then
     if self.gridRow ~= gridRows + 2 then
-      print "HOI"
       piece = currentScene.levelManager:GetComponent(LevelManager).grid[self.gridRow][self.gridCol]
       nextpiece = currentScene.levelManager:GetComponent(LevelManager).grid[self.gridRow+1][self.gridCol]
       if nextpiece ~= nil then
@@ -36,6 +36,32 @@ function PieceScript:MoveDown()
       self.moving = false
     end
   end
+end
+
+function PieceScript:UpdateBrothers(ps)
+  local alreadyBrother = false
+  
+  for _, v in ipairs(self.stackedBrothers) do
+    if v == ps then alreadyBrother = true end
+  end
+  
+  if alreadyBrother == false then
+    table.insert(self.stackedBrothers,ps)
+    for _, v in ipairs(self.stackedBrothers) do
+      v.stackedBrothers = self.stackedBrothers
+    end
+  end
+end
+
+function PieceScript:CountBrothers()
+  local count = 0
+  
+  for _, v in ipairs(self.stackedBrothers) do
+    count = count + 1
+  end
+  
+  return count
+  
 end
 
 

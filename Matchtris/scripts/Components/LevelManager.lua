@@ -1,5 +1,7 @@
 LevelManager = Object:extend()
 
+local LevelState = {Tetromino = 0, Stack = 1, Match = 2, PowerUp = 3}
+
 function LevelManager:new()
   self.grid = {{}}
   self.time = fallTime
@@ -13,12 +15,12 @@ end
 
 function LevelManager:update(dt, gameobject)
   
-  if self.tetromino ~= nil then
+  if self.levelState == LevelState.Tetromino then
   
     self.downtimer = self.downtimer + dt
     
     if self.downtimer >= self.time then
-      self:PrintGrid()
+      --self:PrintGrid()
       self:MovePieceDown()
       self.downtimer = 0
     end
@@ -43,35 +45,89 @@ function LevelManager:update(dt, gameobject)
         self.scrolltimer = self.scrolltimer + dt
       end
       arrowPressed = true
+    elseif love.keyboard.isDown ("up") then
+      if arrowPressed == false then
+        self:RotatePiece()
+      end
+      arrowPressed = true
     else
-      self.scrolltimer = 0
       arrowPressed = false
     end
     
     if love.keyboard.isDown ("down") then
-      self.time = fallTime/10
+      self.time = fallTime/20
     else
       self.time = fallTime
     end
   
-  else
+  elseif self.levelState == LevelState.Stack then
+  
     self.downtimer = self.downtimer + dt
     
-    if self.downtimer >= self.time/20 then
+    if self.downtimer >= fallTime/40 then
       
-      self:MovePieces(0)
-      self:UpdateGridPieces(0)
+      self:MovePieces()
+      self:UpdateGridPieces()
       
       if self:PiecesMoving() == false then
-        self:TetrominoSpawn()
+        self.levelState = LevelState.Match
       end
       
       self.downtimer = 0
       
     end
     
+  elseif self.levelState == LevelState.Match then
+    
+    self:CheckMatches()
+    
+  elseif self.levelState == LevelState.PowerUp then
+  
+  end  
+
+end
+
+function LevelManager:CheckMatches()
+  local match = false
+  
+  for r=1,gridRows+2,1 do
+    for c=1,gridCols,1 do
+      if self.grid[r][c] ~= nil then
+        ps = self.grid[r][c]:GetComponent(PieceScript)
+        self:CheckPieceBrothers(ps)
+      end
+    end  
   end
   
+  for r=1,gridRows+2,1 do
+    for c=1,gridCols,1 do
+      if self.grid[r][c] ~= nil then
+        ps = self.grid[r][c]:GetComponent(PieceScript)
+        if ps:CountBrothers() >= 3 then
+          self:CalculatePoints(ps.stackedBrothers)
+          match = true
+        end
+      end
+    end  
+  end
+  
+  if match then self.levelState = LevelState.Stack else self:TetrominoSpawn() end
+  
+end
+
+function LevelManager:CalculatePoints(pieceArray)
+  for _,v in ipairs(pieceArray) do
+    -- CALCULAR PUNTOS AQUI
+    self.grid[v.gridRow][v.gridCol]:destroy()
+    self.grid[v.gridRow][v.gridCol] = nil
+  end
+end
+
+function LevelManager:RotatePiece()
+  if self.tetromino ~= nil then
+    self.tetromino:Rotate()
+    self:UpdateTetrominoPieces()
+  end
 end
 
 function LevelManager:MovePieces()
@@ -120,21 +176,25 @@ end
 function LevelManager:MovePieceDown()
   if self:CheckDownCollision() then
     self.tetromino:MovePieceDown()
-    self:UpdateGridPieces(0)
+    self:UpdateTetrominoPieces()
   end
 end
 
 function LevelManager:MovePieceLeft()
-  if self:CheckLeftCollision() then
-    self.tetromino:MovePieceLeft()
-    self:UpdateGridPieces(1)
+  if self.tetromino ~= nil then
+    if self:CheckLeftCollision() then
+      self.tetromino:MovePieceLeft()
+      self:UpdateTetrominoPieces()
+    end
   end
 end
 
 function LevelManager:MovePieceRight()
-  if self:CheckRightCollision() then
-    self.tetromino:MovePieceRight()
-    self:UpdateGridPieces(0)
+  if self.tetromino ~= nil then
+    if self:CheckRightCollision() then
+      self.tetromino:MovePieceRight()
+      self:UpdateTetrominoPieces()
+    end
   end
 end
 
@@ -160,37 +220,47 @@ function LevelManager:AddTetromino(tetromino)
   end
 end
 
-function LevelManager:UpdateGridPieces(direction)
+function LevelManager:UpdateGridPieces()
   
-  if direction == 0 then
+  for r=gridRows+2,1,-1 do
+    for c=gridCols,1,-1 do
+      if self.grid[r][c] ~= nil then
+        ps = self.grid[r][c]:GetComponent(PieceScript)
+        if ps.gridCol ~= c or ps.gridRow ~= r then
+          self.grid[ps.gridRow][ps.gridCol] = self.grid[r][c]
+          self.grid[r][c] = nil
+        end
+      end
+    end  
+  end
+
+end
+
+function LevelManager:UpdateTetrominoPieces()
   
-    for r=gridRows+2,1,-1 do
-      for c=gridCols,1,-1 do
-        if self.grid[r][c] ~= nil then
-          ps = self.grid[r][c]:GetComponent(PieceScript)
-          if ps.gridCol ~= c or ps.gridRow ~= r then
-            self.grid[ps.gridRow][ps.gridCol] = self.grid[r][c]
-            self.grid[r][c] = nil
-          end
+  for r=gridRows+2,1,-1 do
+    for c=gridCols,1,-1 do
+      if self.grid[r][c] ~= nil then
+        ps = self.grid[r][c]:GetComponent(PieceScript)
+        if ps.stacked == false then
+          self.grid[r][c] = nil
         end
-      end  
-    end
-    
-  elseif direction == 1 then
-     for r=gridRows+2,1,-1 do
-      for c=1,gridCols,1 do
-        if self.grid[r][c] ~= nil then
-          ps = self.grid[r][c]:GetComponent(PieceScript)
-          if ps.gridCol ~= c or ps.gridRow ~= r then
-            self.grid[ps.gridRow][ps.gridCol] = self.grid[r][c]
-            self.grid[r][c] = nil
-          end
-        end
-      end  
+      end
+    end  
+  end
+  
+  for r,v in ipairs(self.tetromino.grid) do
+    for c,t in ipairs(v) do
+      if t ~= 0 then
+        ps = self.tetromino.grid[r][c]:GetComponent(PieceScript)
+        self.grid[ps.gridRow][ps.gridCol] = self.tetromino.grid[r][c]
+      end
     end
   end
 
 end
+
+
 
 function LevelManager:CheckLeftCollision()
   if self.tetromino ~= nil then
@@ -200,6 +270,10 @@ function LevelManager:CheckLeftCollision()
           ps = self.tetromino.grid[r][c]:GetComponent(PieceScript)
           if ps.gridCol == 1 then
             return false
+          elseif self.grid[ps.gridRow][ps.gridCol-1] ~= nil then
+            if self.grid[ps.gridRow][ps.gridCol-1]:GetComponent(PieceScript).stacked == true then
+              return false
+            end
           end
         end
       end
@@ -216,6 +290,10 @@ function LevelManager:CheckRightCollision()
           ps = self.tetromino.grid[r][c]:GetComponent(PieceScript)
           if ps.gridCol == gridCols then
             return false
+          elseif self.grid[ps.gridRow][ps.gridCol+1] ~= nil then
+            if self.grid[ps.gridRow][ps.gridCol+1]:GetComponent(PieceScript).stacked == true then
+              return false
+            end
           end
         end
       end
@@ -253,9 +331,22 @@ function LevelManager:CheckDownCollision()
   
 end
 
+function LevelManager:GetTetrominoCoord()
+  for r=1,gridRows+2,1 do
+    for c=1,gridCols,1 do
+      if self.grid[r][c] ~= nil then
+        if self.grid[r][c]:GetComponent(PieceScript).stacked == false then
+          return r,c
+        end
+      end
+    end
+  end
+end
+
 function LevelManager:TetrominoSpawn()
   currentScene.tetromino = GameObject({TetrominoScript(true)},Transform())
   table.insert (currentScene.lObjects, currentScene.tetromino)
+  self.levelState = LevelState.Tetromino
 end
 
 function LevelManager:StackTetromino()
@@ -270,5 +361,41 @@ function LevelManager:StackTetromino()
     end
   end
   self.tetromino = nil
+  self.levelState = LevelState.Stack
   currentScene.tetromino:destroy()
+end
+
+function LevelManager:CheckPieceBrothers(ps)
+  if ps.gridRow > 1 then
+    if self.grid[ps.gridRow-1][ps.gridCol] ~= nil then
+      brotherPs = self.grid[ps.gridRow-1][ps.gridCol]:GetComponent(PieceScript)
+      if brotherPs.color == ps.color then
+        ps:UpdateBrothers(brotherPs)
+      end
+    end
+  end
+  if ps.gridRow < gridRows+2 then
+    if self.grid[ps.gridRow+1][ps.gridCol] ~= nil then
+      brotherPs = self.grid[ps.gridRow+1][ps.gridCol]:GetComponent(PieceScript)
+      if brotherPs.color == ps.color then
+        ps:UpdateBrothers(brotherPs)
+      end
+    end
+  end
+  if ps.gridCol > 1 then
+    if self.grid[ps.gridRow][ps.gridCol-1] ~= nil then
+      brotherPs = self.grid[ps.gridRow][ps.gridCol-1]:GetComponent(PieceScript)
+      if brotherPs.color == ps.color then
+        ps:UpdateBrothers(brotherPs)
+      end
+    end
+  end
+  if ps.gridCol < gridCols then
+    if self.grid[ps.gridRow][ps.gridCol+1] ~= nil then
+      brotherPs = self.grid[ps.gridRow][ps.gridCol+1]:GetComponent(PieceScript)
+      if brotherPs.color == ps.color then
+        ps:UpdateBrothers(brotherPs)
+      end
+    end
+  end
 end

@@ -99,3 +99,52 @@ function TetrominoScript:MovePieceRight()
     end
   end
 end
+
+function TetrominoScript:Rotate()
+  
+  local row, col = 0,0
+  
+  for r,v in ipairs(self.grid) do
+    row = row + 1
+    for c,t in ipairs(v) do
+      col = col + 1
+    end
+  end
+  
+  col = col/row
+  
+   local initRow, initCol
+  
+  for c = 1, col, 1 do
+    if self.grid[1][c] ~= 0 then
+      ps = self.grid[1][c]:GetComponent(PieceScript)
+      initRow, initCol = ps.gridRow, ps.gridCol+1-c
+      break
+    end
+  end
+
+  local newGrid = {}
+  
+  for c = 1, col, 1 do
+    t = {}
+    for r = row, 1, -1 do
+      table.insert (t, self.grid[r][c])
+    end
+    table.insert (newGrid, t)
+  end
+  
+  self.grid = newGrid
+  
+  for r,v in ipairs(self.grid) do
+    for c,t in ipairs(v) do
+      if t ~= 0 then
+        ps = self.grid[r][c]:GetComponent(PieceScript)
+        ps.gridRow = initRow + r
+        ps.gridCol = initCol + c - 1
+        self.grid[r][c].transform.position.y = (h/2 - currentScene.background.spriteRenderer.origin.y-1.5*pixelHeight) + (r-1+initRow) * pixelHeight
+        self.grid[r][c].transform.position.x = (w/2 - currentScene.background.spriteRenderer.origin.x - pixelWidth * 0.5) + (c-1+initCol) * pixelWidth 
+      end
+    end
+  end
+  
+end

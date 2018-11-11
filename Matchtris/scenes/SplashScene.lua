@@ -6,7 +6,6 @@ end
 
 function SplashScene:Load()
   self.lObjects = {}
-  self.go = false
   self.c = 0
   -- GAME OBJECTS
   
@@ -15,8 +14,8 @@ function SplashScene:Load()
 end
 
 function SplashScene:update(dt)
-  if self.c >= 5 then
-    self.go = true
+  if self.c >= 2.5 then
+    changeState(GameStates.menu)
   else
     self.c= self.c + dt
   end

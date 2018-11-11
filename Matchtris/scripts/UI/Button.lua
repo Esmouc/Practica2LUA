@@ -1,11 +1,11 @@
 Button = Object:extend()
 
 function Button:new(callback, x,y, newFont, value, textColor, rectColor,rectWidth, rectHeight)
-  self.fillText = Text(x,y,0,22,200,"center",newFont,value, textColor or colors.BLACK)
+  self.fillText = Text(x,y,0,22,250,"center",newFont,value, textColor or colors.BLACK)
   self.x = x
   self.y = y
-  self.rectWidth = rectWidth or 200
-  self.rectHeight = rectHeight or 70
+  self.rectWidth = rectWidth or 250
+  self.rectHeight = rectHeight or 90
   self.rectColor = rectColor or colors.WHITE
   self.currentColor = self.rectColor
   self.isClicked = false

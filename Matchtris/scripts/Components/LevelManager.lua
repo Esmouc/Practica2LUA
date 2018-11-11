@@ -116,11 +116,22 @@ function LevelManager:CheckMatches()
 end
 
 function LevelManager:CalculatePoints(pieceArray)
+  local count = 0 
+  local auxScore = 0
+  local multiplier = 1
+  
   for _,v in ipairs(pieceArray) do
-    -- CALCULAR PUNTOS AQUI
+    count = count + 1
+    auxScore = auxScore + 100 * v.multiplier
+    if count > 3 then
+      multiplier = multiplier * 1.5
+    end
     self.grid[v.gridRow][v.gridCol]:destroy()
     self.grid[v.gridRow][v.gridCol] = nil
   end
+  
+  playerScore = playerScore + auxScore * multiplier
+  currentScene.playerScore.value = playerScore
 end
 
 function LevelManager:RotatePiece()
@@ -315,7 +326,11 @@ function LevelManager:CheckDownCollision()
             tetrominoStacked = true;
           elseif self.grid[ps.gridRow+1][ps.gridCol] ~= nil then
             if self.grid[ps.gridRow+1][ps.gridCol]:GetComponent(PieceScript).stacked == true then
-              tetrominoStacked = true;
+              if ps.gridRow == 2 then
+                changeState(GameStates.End)
+              else
+                tetrominoStacked = true;
+              end
             end
           end
         end

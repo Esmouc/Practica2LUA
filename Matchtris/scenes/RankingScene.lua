@@ -6,10 +6,9 @@ end
 
 function RankingScene:Load()
   self.lObjects = {}
-  self.back = false
   -- GAME OBJECTS
-  self.exit = Button(Exit(), w/2, h * (2/3), font, "Exit")
-  self.backB = Button(Back(), w/2, h/3, font, "Back")
+  self.exit = Button(self.Exit, w/2, h * (2/3), font, "Exit")
+  self.backB = Button(self.Back, w/2, h/3, font, "Back")
   -- INSERTAMOS LOS OBJETOS A LA ESCENA
   table.insert (self.lObjects, self.exit)
   table.insert (self.lObjects, self.backB)
@@ -29,5 +28,5 @@ function RankingScene:Exit()
   os.exit()
 end
 function RankingScene:Back()
-  self.back = true
+  changeState(GameStates.menu)
 end

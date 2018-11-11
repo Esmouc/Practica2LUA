@@ -52,7 +52,9 @@ function TetrominoScript:InstantiateTetromino()
       if t ~= 0 then
         table.insert(currentScene.lObjects, self.grid[r][c])
         currentScene.foreGround:destroy()
+        currentScene.playerScore:destroy()
         table.insert(currentScene.lObjects, currentScene.foreGround)
+        table.insert(currentScene.lObjects, currentScene.playerScore)
         ps = self.grid[r][c]:GetComponent(PieceScript)
         ps.gridRow = r
         ps.gridCol = c + gridCols/2 - 1

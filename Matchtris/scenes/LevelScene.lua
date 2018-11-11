@@ -15,14 +15,14 @@ function LevelScene:Load()
   
   -- UI
   
-  self.playerScore = Text(w/2,h/2,0,0,500,"center")
+  self.playerScore = Text(0,0,0,4,350,"right",smallfont)
   
   -- INSERTAMOS LOS OBJETOS A LA ESCENA
   
   table.insert (self.lObjects, self.background)
-  table.insert (self.lObjects, self.playerScore)
   table.insert (self.lObjects, self.foreGround)
   table.insert (self.lObjects, self.levelManager)
+  table.insert (self.lObjects, self.playerScore)
   
   self.levelManager:GetComponent(LevelManager):TetrominoSpawn()
   

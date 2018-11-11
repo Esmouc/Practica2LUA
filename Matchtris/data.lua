@@ -17,16 +17,23 @@ colors = {WHITE = {1,1,1,1}, GREY = {0.831, 0.831, 0.831, 1}, DARKGREY = {0.521,
 
 -- FONTS
 font = love.graphics.newFont("font/D-DIN-Bold.otf",50)
+smallfont = love.graphics.newFont("font/D-DIN-Bold.otf",40)
 
 --TEXTURES
 barPath = "sprites/backgrounds/matchtrisBar.png"
 bgPath = "sprites/backgrounds/matchtrisBGBACK.png"
-fgPath = "sprites/backgrounds/matchtrisBG.png"
+fgPath = 0
+bgnormal = "sprites/backgrounds/matchtrisBG.png"
 bgMiautris = "sprites/backgrounds/miautrisBG.png"
+menuPath = "sprites/backgrounds/matchtrisBGMENU.png"
+botonesPath = {exit = "sprites/botones/exit.png" , mexit="sprites/botones/menuexit.png", menumeowtris ="sprites/botones/menumeowtris.png", play="sprites/botones/menuplay.png", ranking ="sprites/botones/menuranking.png", resume ="sprites/botones/resume.png"}
 
 -- PIECES
 
-piecesPaths = {"sprites/piezas/amarilla.png","sprites/piezas/azul.png","sprites/piezas/lila.png","sprites/piezas/naranja.png", "sprites/piezas/roja.png","sprites/piezas/verde.png"}
+piecesPaths = {}
+normalPiecesPaths = {"sprites/piezas/amarilla.png","sprites/piezas/azul.png","sprites/piezas/lila.png","sprites/piezas/naranja.png", "sprites/piezas/roja.png","sprites/piezas/verde.png"}
+miauPiecesPaths = {"sprites/piezas/gatitoamarillo.png","sprites/piezas/gatitoazul.png","sprites/piezas/gatitolila.png","sprites/piezas/gatitonaranja.png", "sprites/piezas/gatitorojo.png","sprites/piezas/gatitoverde.png"}
+
 
 --TETROMINOS GRIDS
 

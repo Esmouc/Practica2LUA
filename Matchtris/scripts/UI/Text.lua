@@ -22,3 +22,11 @@ function Text:draw()
   love.graphics.printf(self.value, self.x + self.xo , self.y + self.yo, self.limit, self.align)
   love.graphics.setColor(colors.WHITE)
 end
+
+function Text:destroy()
+  for i,v in ipairs(currentScene.lObjects) do
+    if v == self then
+      table.remove(currentScene.lObjects, i)
+    end
+  end
+end

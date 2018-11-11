@@ -6,12 +6,10 @@ end
 
 function EndScene:Load()
   self.lObjects = {}
-  self.reiniciar = false
-  self.ranking = false
   -- GAME OBJECTS
-  self.exit = Button(Exit(), w/2, h * (2/3), font, "Exit")
-  self.reiniciarB = Button(Reiniciar(), w/2, h/3, font, "Reiniciar")
-  self.rankingB = Button(Ranking(), w/2, h/2, font, "Ranking")
+  self.exit = Button(self.Exit, w/2, h * (2/3), font, "Exit")
+  self.reiniciarB = Button(self.Reiniciar, w/2, h/3, font, "Reiniciar")
+  self.rankingB = Button(self.Ranking, w/2, h/2, font, "Ranking")
   -- INSERTAMOS LOS OBJETOS A LA ESCENA
   table.insert (self.lObjects, self.exit)
   table.insert (self.lObjects, self.reiniciarB)
@@ -32,8 +30,8 @@ function EndScene:Exit()
   os.exit()
 end
 function EndScene:Reiniciar()
-  self.reiniciar = true
+  changeState(GameStates.menu)
 end
 function EndScene:Ranking()
-  self.play = true
+  changeState(GameStates.ranking)
 end

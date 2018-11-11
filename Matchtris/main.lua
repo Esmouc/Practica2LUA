@@ -1,5 +1,6 @@
+GameStates = {gameplay = 0, splash = 1, menu = 2, End = 3, ranking = 4}
 
-GameStates = {gameplay = 0}
+playerScore = 0
 
 function love.load(arg)
   
@@ -14,6 +15,10 @@ function love.load(arg)
   
   -- SCENES
   require "scenes/LevelScene"
+  require "scenes/EndScene"
+  require "scenes/MenuScene"
+  require "scenes/RankingScene"
+  require "scenes/SplashScene"
   
   -- MAIN CLASSES
   require "lib/unity/GameObject"
@@ -37,11 +42,9 @@ function love.load(arg)
   
   -- LOAD SCENES
   
-  currentScene = LevelScene()
-  currentScene:Load()
+  changeState(GameStates.splash)
 
   -- SETTING GAME STATE
-  gameState = GameStates.gameplay
   
 end
 
@@ -54,5 +57,32 @@ end
 function love.draw()
  
   currentScene:draw()
+  
+end
+
+function changeState(newState)
+  
+  if newState == GameStates.gameplay then
+    gameState = GameStates.gameplay
+    currentScene = LevelScene()
+  end
+  if newState == GameStates.splash then
+    gameState = GameStates.splash
+    currentScene = SplashScene()
+  end
+  if newState == GameStates.menu then
+    gameState = GameStates.menu
+    currentScene = MenuScene()
+  end
+  if newState == GameStates.End then
+    gameState = GameStates.End
+    currentScene = EndScene()
+  end
+  if newState == GameStates.ranking then
+    gameState = GameStates.ranking
+    currentScene = RankingScene()
+  end
+
+  currentScene:Load()
   
 end

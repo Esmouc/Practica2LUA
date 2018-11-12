@@ -12,6 +12,7 @@ function LevelScene:Load()
   self.background = GameObject({},Transform(w/2,h/2), SpriteRenderer(bgPath))
   self.foreGround = GameObject({},Transform(w/2,h/2), SpriteRenderer(fgPath))
   self.levelManager = GameObject({LevelManager()},Transform())
+  self.powerUpManager = GameObject({PowerUpManager(1)},Transform(w/2, h/2-self.background.spriteRenderer.origin.y+5), SpriteRenderer(powerBarPath[1]))
   
   -- UI
   

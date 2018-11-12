@@ -41,12 +41,14 @@ function MenuScene:Play()
   piecesPaths = normalPiecesPaths
   fgPath = bgnormal
   bgPath = matchbgPath
+  powerPiecesPaths = normalPowerPiecesPaths
   changeState(GameStates.gameplay)
 end
 function MenuScene:PlayMiau()
   piecesPaths = miauPiecesPaths
   fgPath = bgMiautris
   bgPath = miaubgPath
+  powerPiecesPaths = miauPowerPiecesPaths
   changeState(GameStates.gameplay)
 end
 function MenuScene:Ranking()

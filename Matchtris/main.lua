@@ -34,6 +34,7 @@ function love.load(arg)
   require "scripts/Components/BarScript"
   require "scripts/Components/PieceScript"
   require "scripts/Components/TetrominoScript"
+  require "scripts/Components/PowerUpManager"
   
   -- GAME DATA
   require "data"

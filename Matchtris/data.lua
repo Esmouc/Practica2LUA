@@ -4,6 +4,7 @@ h = love.graphics.getHeight()
 -- DATA
 fallTime = 1.0
 scrollTime = 0.1
+powerUpCooldown = 60
 
 -- GRID
 
@@ -36,6 +37,11 @@ piecesPaths = {}
 normalPiecesPaths = {"sprites/piezas/amarilla.png","sprites/piezas/azul.png","sprites/piezas/lila.png","sprites/piezas/naranja.png", "sprites/piezas/roja.png","sprites/piezas/verde.png"}
 miauPiecesPaths = {"sprites/piezas/gatitoamarillo.png","sprites/piezas/gatitoazul.png","sprites/piezas/gatitolila.png","sprites/piezas/gatitonaranja.png", "sprites/piezas/gatitorojo.png","sprites/piezas/gatitoverde.png"}
 
+powerPiecesPaths = {}
+normalPowerPiecesPaths = {"sprites/piezas/amarillaplus.png","sprites/piezas/azulplus.png","sprites/piezas/lilaplus.png","sprites/piezas/naranjaplus.png", "sprites/piezas/rojaplus.png","sprites/piezas/verdeplus.png"}
+miauPowerPiecesPaths = {"sprites/piezas/gatitoamarilloplus.png","sprites/piezas/gatitoazulplus.png","sprites/piezas/gatitolilaplus.png","sprites/piezas/gatitonaranjaplus.png", "sprites/piezas/gatitorojoplus.png","sprites/piezas/gatitoverdeplus.png"}
+
+powerBarPath = {"sprites/powerups/barraamarilla.png","sprites/powerups/barraazul.png","sprites/powerups/barralila.png","sprites/powerups/barranaranja.png", "sprites/powerups/barraroja.png","sprites/powerups/barraverde.png"}
 
 --TETROMINOS GRIDS
 

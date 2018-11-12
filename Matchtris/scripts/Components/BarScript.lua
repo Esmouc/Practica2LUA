@@ -5,9 +5,11 @@ function BarScript:new()
   self.max = 5
   self.height = 700 --altura de la barra
 end
+
 function BarScript:update(dt)
   
 end
+
 function BarScript:Change(Mtch, gameobject)
   if Mtch then
     self.streak = self.streak + 1

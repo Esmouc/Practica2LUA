@@ -115,7 +115,7 @@ function TetrominoScript:Rotate()
   
   col = col/row
   
-   local initRow, initCol
+  local initRow, initCol
   
   for c = 1, col, 1 do
     if self.grid[1][c] ~= 0 then

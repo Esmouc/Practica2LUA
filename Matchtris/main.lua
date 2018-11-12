@@ -4,9 +4,9 @@ playerScore = 0
 
 function love.load(arg)
   
-   if arg[#arg] == "-debug" then require("mobdebug").start() end -- Enable the debugging with ZeroBrane Studio
+  if arg[#arg] == "-debug" then require("mobdebug").start() end -- Enable the debugging with ZeroBrane Studio
    
-   math.randomseed(os.time())
+  math.randomseed(os.time())
    
   --LIBRARIES
   Object = require "lib/object"

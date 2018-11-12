@@ -21,7 +21,9 @@ smallfont = love.graphics.newFont("font/D-DIN-Bold.otf",40)
 
 --TEXTURES
 barPath = "sprites/backgrounds/matchtrisBar.png"
-bgPath = "sprites/backgrounds/matchtrisBGBACK.png"
+bgPath = 0
+matchbgPath="sprites/backgrounds/matchtrisBGBACK.png"
+miaubgPath = "sprites/backgrounds/miautrisBGBACK.png"
 fgPath = 0
 bgnormal = "sprites/backgrounds/matchtrisBG.png"
 bgMiautris = "sprites/backgrounds/miautrisBG.png"

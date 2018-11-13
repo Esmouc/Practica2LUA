@@ -11,6 +11,7 @@ function LevelManager:new()
   self.arrowPressed = false
   self.tetromino = nil
   self:InitGrid()
+  matchtrisSong:play()
 end
 
 function LevelManager:update(dt, gameobject)
@@ -112,6 +113,7 @@ function LevelManager:CheckMatches()
   end
   
   if match then self.levelState = LevelState.Stack else self:TetrominoSpawn() end
+  if match then matchSound:play() end
   
 end
 
@@ -137,6 +139,7 @@ end
 function LevelManager:RotatePiece()
   if self.tetromino ~= nil then
     self.tetromino:Rotate()
+    rotateSound:play()
     self:UpdateTetrominoPieces()
   end
 end

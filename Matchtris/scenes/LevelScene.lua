@@ -17,6 +17,7 @@ function LevelScene:Load()
   -- UI
   
   self.playerScore = Text(0,0,0,4,350,"right",smallfont)
+    
   
   -- INSERTAMOS LOS OBJETOS A LA ESCENA
   

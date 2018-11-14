@@ -3,8 +3,8 @@ h = love.graphics.getHeight()
 
 -- DATA
 fallTime = 1.0
-scrollTime = 0.1
-powerUpCooldown = 60
+scrollTime = 0.05
+powerUpCooldown = 5
 
 -- GRID
 
@@ -36,13 +36,9 @@ botonesPath = {exit = "sprites/botones/exit.png" , mexit="sprites/botones/menuex
 matchtrisSong = love.audio.newSource("sounds/matchtrisong.wav", "static")
 matchtrisSong:setLooping(true)
 matchtrisSong:setVolume(0.3)
-
-meowSong = love.audio.newSource("sounds/meowtris.mp3", "static")
-meowSong:setLooping(true)
-meowSong:setVolume(0.2)
-
 rotateSound = love.audio.newSource("sounds/rotarpieza.wav", "static")
 matchSound = love.audio.newSource("sounds/match.wav", "static")
+timeStop = love.audio.newSource("sounds/timestop.mp3", "static")
 clackSound = love.audio.newSource("sounds/clack.wav", "static")
 
 -- PIECES
@@ -59,4 +55,4 @@ powerBarPath = {"sprites/powerups/barraamarilla.png","sprites/powerups/barraazul
 
 --TETROMINOS GRIDS
 
-tGrids = {{{0,1,0},{1,1,1}},{{1,1,1,1}},{{1,0,0},{1,1,1}},{{0,0,1},{1,1,1}},{{1,1},{1,1}},{{0,1,1},{1,1,0}},{{1,1,0},{0,1,1}}} 
+tGrids = {{{0,1,0},{1,1,1}},{{1,1,1,1}},{{1,0,0},{1,1,1}},{{0,0,1},{1,1,1}},{{1,1},{1,1}},{{0,1,1},{1,1,0}},{{1,1,0},{0,1,1}},{{1}}} 

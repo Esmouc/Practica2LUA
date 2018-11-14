@@ -30,3 +30,7 @@ end
 function RankingScene:Back()
   changeState(GameStates.menu)
 end
+
+function RankingScene:keypressed(key)
+
+end

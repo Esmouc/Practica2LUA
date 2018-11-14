@@ -35,3 +35,7 @@ function SplashScene:draw()
   end
   
 end
+
+function SplashScene:keypressed(key)
+
+end

@@ -1,6 +1,6 @@
 TetrominoScript = Object:extend()
 
-function TetrominoScript:new(random, tetrominoType)
+function TetrominoScript:new(random, tetrominoType, powerUp)
   
   if random then
     self.tetrominoType = math.random(1,7)
@@ -9,6 +9,7 @@ function TetrominoScript:new(random, tetrominoType)
   end
   
   self.grid = {}
+  self.powerUp = false or powerUp
   
   self:InitGrid()
   self:CreateTetromino()
@@ -69,6 +70,17 @@ function TetrominoScript:InstantiateTetromino()
   currentScene.levelManager:GetComponent(LevelManager):AddTetromino(self)
 end
 
+function TetrominoScript:MovePieceUp()
+  for r,v in ipairs(self.grid) do
+    for c,t in ipairs(v) do
+      if t ~= 0 then
+        ps = self.grid[r][c]:GetComponent(PieceScript)
+        ps.gridRow = ps.gridRow - 1
+        self.grid[r][c].transform.position.y = self.grid[r][c].transform.position.y - pixelHeight
+      end
+    end
+  end
+end
 function TetrominoScript:MovePieceDown()
   for r,v in ipairs(self.grid) do
     for c,t in ipairs(v) do
@@ -153,3 +165,19 @@ function TetrominoScript:Rotate()
   end
   
 end
+
+function TetrominoScript:GetOrigin()
+  
+  for r,v in ipairs(self.grid) do
+    for c,_ in ipairs(v) do
+      if self.grid[r][c] ~= 0 then
+        ps = self.grid[r][c]:GetComponent(PieceScript)
+        return ps.gridRow, ps.gridCol+1-c
+      end
+    end
+  end
+  
+  return 0,0
+  
+end
+

@@ -87,3 +87,7 @@ function changeState(newState)
   currentScene:Load()
   
 end
+
+function love.keypressed(key)
+   currentScene:keypressed(key)
+end

@@ -56,3 +56,7 @@ end
 function MenuScene:Ranking()
   changeState(GameStates.ranking)
 end
+
+function MenuScene:keypressed(key)
+
+end

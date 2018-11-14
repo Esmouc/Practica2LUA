@@ -35,3 +35,7 @@ end
 function EndScene:Ranking()
   changeState(GameStates.ranking)
 end
+
+function EndScene:keypressed(key)
+
+end

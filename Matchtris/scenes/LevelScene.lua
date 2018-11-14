@@ -47,4 +47,8 @@ function LevelScene:draw()
   
 end
 
+function LevelScene:keypressed(key)
+  self.levelManager:GetComponent(LevelManager):keypressed(key)
+end
+
     

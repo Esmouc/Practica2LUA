@@ -1,7 +1,7 @@
 GameStates = {gameplay = 0, splash = 1, menu = 2, End = 3, ranking = 4, pause = 5}
 
 playerScore = 0
-
+gameScene = 0
 function love.load(arg)
   
   if arg[#arg] == "-debug" then require("mobdebug").start() end -- Enable the debugging with ZeroBrane Studio
@@ -65,7 +65,7 @@ function changeState(newState)
   
   if newState == GameStates.gameplay then
     gameState = GameStates.gameplay
-    if gameScene ~= nil then
+    if gameScene ~= 0 then
       currentScene = gameScene
     else
       currentScene = LevelScene()

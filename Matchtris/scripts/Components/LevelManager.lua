@@ -10,156 +10,167 @@ function LevelManager:new()
   self.scrolltimer = 0
   self.wormCount = 0
   self.lastwormdir = 1
+  self.downdivide = 1
   self.arrowPressed = false
   self.tetromino = nil
+  self.pause = false
   self:InitGrid()
 end
 
 function LevelManager:update(dt, gameobject)
   
-  if self.levelState == LevelState.Tetromino then
+  if self.pause == false then
     
-    self.downtimer = self.downtimer + dt
-    
-    if self.downtimer >= self.time then
-      --self:PrintGrid()
-      self:MovePieceDown()
-      self.downtimer = 0
-    end
-    
-    if love.keyboard.isDown ("right") then
-      if self.scrolltimer >= self.scrollTime then
-        self:MovePieceRight()
-        self.scrolltimer = 0
-        self.scrollTime = scrollTime
-      else
-        self.scrolltimer = self.scrolltimer + dt
-      end
-    end
-    
-    if love.keyboard.isDown ("left") then
-      if self.scrolltimer >= self.scrollTime then
-        self:MovePieceLeft()
-        self.scrollTime = scrollTime
-        self.scrolltimer = 0
-      else
-        self.scrolltimer = self.scrolltimer + dt
-      end
-    end
-    
-    if love.keyboard.isDown ("down") then
-      self.time = fallTime/20
-    else
-      self.time = fallTime
-    end
-    
-  elseif self.levelState == LevelState.Stack then
-  
-    self.downtimer = self.downtimer + dt
-    
-    if self.downtimer >= fallTime/40 then
+    if self.levelState == LevelState.Tetromino then
       
-      self:MovePieces()
-      self:UpdateGridPieces()
+      if self.time <= 0.05 then
+        self.time = 0.05
+      else
+        self.time = self.time - dt*0.002
+      end
+        
+      self.downtimer = self.downtimer + dt
       
-      if self:PiecesMoving() == false then
-        self.levelState = LevelState.Match
+      if self.downtimer >= self.time/self.downdivide then
+        --self:PrintGrid()
+        self:MovePieceDown()
+        self.downtimer = 0
       end
       
-      self.downtimer = 0
-      
-    end
-    
-  elseif self.levelState == LevelState.Match then
-    
-    self:CheckMatches()
-    
-  elseif self.levelState == LevelState.TimeStop then
-    
-    if love.keyboard.isDown ("up") then
-      if self.scrolltimer >= self.scrollTime then
-        self.tetromino:MovePieceUp()
-        self.scrolltimer = 0
-        self.scrollTime = scrollTime
-      else
-        self.scrolltimer = self.scrolltimer + dt
-      end
-    end
-    
-     if love.keyboard.isDown ("right") then
-      if self.scrolltimer >= self.scrollTime then
-        self.tetromino:MovePieceRight()
-        self.scrolltimer = 0
-        self.scrollTime = scrollTime
-      else
-        self.scrolltimer = self.scrolltimer + dt
-      end
-    end
-    
-    if love.keyboard.isDown ("left") then
-      if self.scrolltimer >= self.scrollTime then
-        self.tetromino:MovePieceLeft()
-        self.scrolltimer = 0
-      else
-        self.scrolltimer = self.scrolltimer + dt
-      end
-    end
-    
-    if love.keyboard.isDown ("down") then
-      if self.scrolltimer >= self.scrollTime then
-        self.tetromino:MovePieceDown()
-        self.scrollTime = scrollTime
-        self.scrolltimer = 0
-      else
-        self.scrolltimer = self.scrolltimer + dt
-      end
-    end
-    
-  elseif self.levelState == LevelState.Worm then
-
-    if self.scrolltimer >= self.scrollTime then
-      local rand = math.random (1,2)
-      
-      if rand == 1 then
-        self.tetromino:MovePieceDown()
-        self.lastwormdir = 1
-      end
-      if rand == 2 then
-        if self.lastwormdir == 1 then
-          rand = math.random (1,2)
-          if rand == 1  then
-            self.tetromino:MovePieceRight()
-            self.lastwormdir = 2
-          elseif rand == 2 then
-            self.tetromino:MovePieceLeft()
-            self.lastwormdir = 3
-          end
-        elseif self.lastwormdir == 2 then
-          self.tetromino:MovePieceRight()
+      if love.keyboard.isDown ("right") then
+        if self.scrolltimer >= self.scrollTime then
+          self:MovePieceRight()
+          self.scrolltimer = 0
+          self.scrollTime = scrollTime
         else
-          self.tetromino:MovePieceLeft()
+          self.scrolltimer = self.scrolltimer + dt
         end
       end
+      
+      if love.keyboard.isDown ("left") then
+        if self.scrolltimer >= self.scrollTime then
+          self:MovePieceLeft()
+          self.scrollTime = scrollTime
+          self.scrolltimer = 0
+        else
+          self.scrolltimer = self.scrolltimer + dt
+        end
+      end
+      
+      if love.keyboard.isDown ("down") then
+        self.downdivide = 20
+      else
+        self.downdivide = 1
+      end
+      
+    elseif self.levelState == LevelState.Stack then
     
-      self:UpdateTimeStopPieces()
-      self.scrollTime = scrollTime
-      self.scrolltimer = 0
-      self.wormCount = self.wormCount + 1
-    else
-      self.scrolltimer = self.scrolltimer + dt
+      self.downtimer = self.downtimer + dt
+      
+      if self.downtimer >= fallTime/40 then
+        
+        self:MovePieces()
+        self:UpdateGridPieces()
+        
+        if self:PiecesMoving() == false then
+          self.levelState = LevelState.Match
+        end
+        
+        self.downtimer = 0
+        
+      end
+      
+    elseif self.levelState == LevelState.Match then
+      
+      self:CheckMatches()
+      
+    elseif self.levelState == LevelState.TimeStop then
+      
+      if love.keyboard.isDown ("up") then
+        if self.scrolltimer >= self.scrollTime then
+          self.tetromino:MovePieceUp()
+          self.scrolltimer = 0
+          self.scrollTime = scrollTime
+        else
+          self.scrolltimer = self.scrolltimer + dt
+        end
+      end
+      
+       if love.keyboard.isDown ("right") then
+        if self.scrolltimer >= self.scrollTime then
+          self.tetromino:MovePieceRight()
+          self.scrolltimer = 0
+          self.scrollTime = scrollTime
+        else
+          self.scrolltimer = self.scrolltimer + dt
+        end
+      end
+      
+      if love.keyboard.isDown ("left") then
+        if self.scrolltimer >= self.scrollTime then
+          self.tetromino:MovePieceLeft()
+          self.scrolltimer = 0
+        else
+          self.scrolltimer = self.scrolltimer + dt
+        end
+      end
+      
+      if love.keyboard.isDown ("down") then
+        if self.scrolltimer >= self.scrollTime then
+          self.tetromino:MovePieceDown()
+          self.scrollTime = scrollTime
+          self.scrolltimer = 0
+        else
+          self.scrolltimer = self.scrolltimer + dt
+        end
+      end
+      
+    elseif self.levelState == LevelState.Worm then
+
+      if self.scrolltimer >= self.scrollTime then
+        local rand = math.random (1,2)
+        
+        if rand == 1 then
+          self.tetromino:MovePieceDown()
+          self.lastwormdir = 1
+        end
+        if rand == 2 then
+          if self.lastwormdir == 1 then
+            rand = math.random (1,2)
+            if rand == 1  then
+              self.tetromino:MovePieceRight()
+              self.lastwormdir = 2
+            elseif rand == 2 then
+              self.tetromino:MovePieceLeft()
+              self.lastwormdir = 3
+            end
+          elseif self.lastwormdir == 2 then
+            self.tetromino:MovePieceRight()
+          else
+            self.tetromino:MovePieceLeft()
+          end
+        end
+      
+        self:UpdateTimeStopPieces()
+        self.scrollTime = scrollTime
+        self.scrolltimer = 0
+        self.wormCount = self.wormCount + 1
+      else
+        self.scrolltimer = self.scrolltimer + dt
+      end
+      
+      if self.wormCount == 8 then
+        self.levelState = LevelState.Tetromino
+        self.wormCount = 0
+        self:StackTetromino()
+        currentScene.powerUpManager:GetComponent(PowerUpManager).wait = false
+      end
     end
-    
-    if self.wormCount == 8 then
-      self.levelState = LevelState.Tetromino
-      self.wormCount = 0
-      self:StackTetromino()
-      currentScene.powerUpManager:GetComponent(PowerUpManager).wait = false
-    end
-  end  
+  end
 end
 
 function LevelManager:keypressed(key)
-    
+    if self.pause == false then
   if self.levelState == LevelState.Tetromino then
     
     if key == "right"then
@@ -183,13 +194,14 @@ function LevelManager:keypressed(key)
   if self.levelState == LevelState.TimeStop then
     
     if key == "space" then
-      timeStart:play()
+      timeStop:play()
       music:play()
       self.levelState = LevelState.Tetromino
       currentScene.powerUpManager:GetComponent(PowerUpManager).wait = false
       self:UpdateTimeStopPieces()
     end
     
+  end
   end
   
 end
@@ -484,7 +496,7 @@ function LevelManager:CheckDownCollision()
             if self.grid[ps.gridRow+1][ps.gridCol]:GetComponent(PieceScript).stacked == true then
               if ps.gridRow == 2 then
                 music:stop()
-                changeState(GameStates.End)
+                changeState(GameStates.ranking)
               else
                 tetrominoStacked = true;
               end

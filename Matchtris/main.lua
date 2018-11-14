@@ -1,4 +1,4 @@
-GameStates = {gameplay = 0, splash = 1, menu = 2, End = 3, ranking = 4, pause = 5}
+GameStates = {gameplay = 0, splash = 1, menu = 2, End = 3, ranking = 4}
 
 playerScore = 0
 gameScene = 0
@@ -19,7 +19,7 @@ function love.load(arg)
   require "scenes/MenuScene"
   require "scenes/RankingScene"
   require "scenes/SplashScene"
-  require "scenes/PauseScene"
+
   -- MAIN CLASSES
   require "lib/unity/GameObject"
   require "lib/unity/SpriteRenderer"
@@ -86,11 +86,6 @@ function changeState(newState)
   if newState == GameStates.ranking then
     gameState = GameStates.ranking
     currentScene = RankingScene()
-  end
-  if newState == GameStates.pause then
-    gameState = GameStates.pause
-    gameScene = currentScene
-    currentScene = PauseScene()
   end
   
 

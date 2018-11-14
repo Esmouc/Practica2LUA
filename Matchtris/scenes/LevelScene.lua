@@ -5,7 +5,9 @@ function LevelScene:new()
 end
 
 function LevelScene:Load()
+  
   self.lObjects = {}
+
   -- GAME OBJECTS
 
   self.barManager = GameObject({BarScript()},Transform(), SpriteRenderer(barPath))
@@ -13,6 +15,11 @@ function LevelScene:Load()
   self.foreGround = GameObject({},Transform(w/2,h/2), SpriteRenderer(fgPath))
   self.levelManager = GameObject({LevelManager()},Transform())
   self.powerUpManager = GameObject({PowerUpManager(1)},Transform(w/2, h/2-self.background.spriteRenderer.origin.y+5), SpriteRenderer(powerBarPath[1]))
+  
+  --MENU PAUSA
+  self.exit = Button(self.Exit, 75, h * (2/3), font, "Exit")
+  self.volverB = Button(self.Resume, 75, h/3, font, "Resume")
+  self.menuB = Button(self.Menu, 75, h/2, font, "Menu")
   
   -- UI
   
@@ -53,13 +60,45 @@ function LevelScene:draw()
   
 end
 
+function LevelScene:Pause()
+
+  table.insert (self.lObjects, self.exit)
+  table.insert (self.lObjects, self.volverB)
+  table.insert (self.lObjects, self.menuB)
+  print "PAUSED"
+end
+
+function LevelScene:Resume()
+  
+  currentScene.exit:destroy()
+  currentScene.volverB:destroy()
+  currentScene.menuB:destroy()
+  music:play()
+  currentScene.levelManager:GetComponent(LevelManager).pause = false
+  currentScene.powerUpManager:GetComponent(PowerUpManager).wait = false
+  
+end
+
 function LevelScene:keypressed(key)
-  self.levelManager:GetComponent(LevelManager):keypressed(key)
+  
+  local lvManager = self.levelManager:GetComponent(LevelManager)
+  lvManager:keypressed(key)
+ 
   if key == "escape" then
     music:stop()
-    changeState(GameStates.pause)
+    self:Pause()
+    lvManager.pause = true
+    self.powerUpManager:GetComponent(PowerUpManager).wait = true
   end
   
+end
+
+function LevelScene:Exit()
+  os.exit()
+end
+
+function LevelScene:Menu()
+  changeState(GameStates.menu)
 end
 
     

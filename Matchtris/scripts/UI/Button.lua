@@ -19,6 +19,7 @@ function Button:update(dt)
       self.isClicked = true
     elseif self.isClicked then
       self.callback()
+      self.isClicked = false
     else
       self.currentColor = colors.GREY
     end
@@ -40,4 +41,12 @@ function Button:mouseIsOver(mouseX,mouseY)
     return true
   end
   return false
+end
+
+function Button:destroy()
+  for i,v in ipairs(currentScene.lObjects) do
+    if v == self then
+      table.remove(currentScene.lObjects, i)
+    end
+  end
 end

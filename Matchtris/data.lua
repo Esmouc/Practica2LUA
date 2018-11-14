@@ -18,7 +18,7 @@ colors = {WHITE = {1,1,1,1}, GREY = {0.831, 0.831, 0.831, 1}, DARKGREY = {0.521,
 
 -- FONTS
 font = love.graphics.newFont("font/D-DIN-Bold.otf",50)
-smallfont = love.graphics.newFont("font/D-DIN-Bold.otf",40)
+smallfont = love.graphics.newFont("font/D-DIN-Bold.otf",30)
 
 --TEXTURES
 barPath = "sprites/backgrounds/matchtrisBar.png"
@@ -40,7 +40,7 @@ miautrisSong = "sounds/miautris.wav"
 
 rotateSound = love.audio.newSource("sounds/rotarpieza.wav", "static")
 matchSound = love.audio.newSource("sounds/match.wav", "static")
-timeStop = love.audio.newSource("sounds/timestop.wav", "static")
+timeStop = love.audio.newSource("sounds/timestop.mp3", "static")
 timeStart = love.audio.newSource("sounds/timestart.wav", "static")
 clackSound = love.audio.newSource("sounds/clack.wav", "static")
 

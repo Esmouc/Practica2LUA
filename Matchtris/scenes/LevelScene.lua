@@ -56,6 +56,7 @@ end
 function LevelScene:keypressed(key)
   self.levelManager:GetComponent(LevelManager):keypressed(key)
   if key == "escape" then
+    music:stop()
     changeState(GameStates.pause)
   end
   

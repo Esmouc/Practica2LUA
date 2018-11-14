@@ -483,6 +483,7 @@ function LevelManager:CheckDownCollision()
           elseif self.grid[ps.gridRow+1][ps.gridCol] ~= nil then
             if self.grid[ps.gridRow+1][ps.gridCol]:GetComponent(PieceScript).stacked == true then
               if ps.gridRow == 2 then
+                music:stop()
                 changeState(GameStates.End)
               else
                 tetrominoStacked = true;

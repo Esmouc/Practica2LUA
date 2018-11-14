@@ -32,6 +32,7 @@ menuPath = "sprites/backgrounds/matchtrisBGMENU.png"
 splashPath = "sprites/backgrounds/maiutrisSPLASH.png"
 botonesPath = {exit = "sprites/botones/exit.png" , mexit="sprites/botones/menuexit.png", menumeowtris ="sprites/botones/menumeowtris.png", play="sprites/botones/menuplay.png", ranking ="sprites/botones/menuranking.png", resume ="sprites/botones/resume.png"}
 
+pausePath = "sprites/backgrounds/matchtrisBGPAUSE.png"
 -- SOUNDS
 
 matchtrisSong = "sounds/matchtrisong.wav"

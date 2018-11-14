@@ -10,10 +10,13 @@ function PauseScene:Load()
   self.exit = Button(self.Exit, w/2, h * (2/3), font, "Exit")
   self.volverB = Button(self.Reiniciar, w/2, h/3, font, "Volver")
   self.menuB = Button(self.Ranking, w/2, h/2, font, "Menu")
+  self.background = GameObject({},Transform(w/2,h/2), SpriteRenderer(pausePath))
   -- INSERTAMOS LOS OBJETOS A LA ESCENA
+  table.insert (self.lObjects, self.background)
   table.insert (self.lObjects, self.exit)
   table.insert (self.lObjects, self.volverB)
   table.insert (self.lObjects, self.menuB)
+  
 end
 
 function PauseScene:update(dt)

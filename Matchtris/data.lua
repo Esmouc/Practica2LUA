@@ -41,6 +41,7 @@ miautrisSong = "sounds/miautris.wav"
 rotateSound = love.audio.newSource("sounds/rotarpieza.wav", "static")
 matchSound = love.audio.newSource("sounds/match.wav", "static")
 timeStop = love.audio.newSource("sounds/timestop.wav", "static")
+timeStart = love.audio.newSource("sounds/timestart.wav", "static")
 clackSound = love.audio.newSource("sounds/clack.wav", "static")
 
 -- PIECES

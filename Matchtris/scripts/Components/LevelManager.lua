@@ -183,7 +183,7 @@ function LevelManager:keypressed(key)
   if self.levelState == LevelState.TimeStop then
     
     if key == "space" then
-      timeStop:play()
+      timeStart:play()
       music:play()
       self.levelState = LevelState.Tetromino
       currentScene.powerUpManager:GetComponent(PowerUpManager).wait = false

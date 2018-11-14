@@ -17,7 +17,13 @@ function LevelScene:Load()
   -- UI
   
   self.playerScore = Text(0,0,0,4,350,"right",smallfont)
-    
+  
+  -- MUSICA
+  
+   music = love.audio.newSource(songSelect, "static")
+   music:setLooping(true)
+   music:setVolume(0.3)
+   music:play()
   
   -- INSERTAMOS LOS OBJETOS A LA ESCENA
   

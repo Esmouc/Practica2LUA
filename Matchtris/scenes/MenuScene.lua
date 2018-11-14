@@ -42,7 +42,7 @@ function MenuScene:Play()
   fgPath = bgnormal
   bgPath = matchbgPath
   powerPiecesPaths = normalPowerPiecesPaths
-  matchtrisSong:play()
+  songSelect = matchtrisSong
   changeState(GameStates.gameplay)
 end
 function MenuScene:PlayMiau()
@@ -50,7 +50,7 @@ function MenuScene:PlayMiau()
   fgPath = bgMiautris
   bgPath = miaubgPath
   powerPiecesPaths = miauPowerPiecesPaths
-  meowSong:play()
+  songSelect = miautrisSong
   changeState(GameStates.gameplay)
 end
 function MenuScene:Ranking()

@@ -29,6 +29,7 @@ fgPath = 0
 bgnormal = "sprites/backgrounds/matchtrisBG.png"
 bgMiautris = "sprites/backgrounds/miautrisBG.png"
 menuPath = "sprites/backgrounds/matchtrisBGMENU.png"
+splashPath = "sprites/backgrounds/maiutrisSPLASH.png"
 botonesPath = {exit = "sprites/botones/exit.png" , mexit="sprites/botones/menuexit.png", menumeowtris ="sprites/botones/menumeowtris.png", play="sprites/botones/menuplay.png", ranking ="sprites/botones/menuranking.png", resume ="sprites/botones/resume.png"}
 
 -- SOUNDS
@@ -36,6 +37,9 @@ botonesPath = {exit = "sprites/botones/exit.png" , mexit="sprites/botones/menuex
 matchtrisSong = love.audio.newSource("sounds/matchtrisong.wav", "static")
 matchtrisSong:setLooping(true)
 matchtrisSong:setVolume(0.3)
+meowSong = love.audio.newSource("sounds/miautrisong.wav", "static")
+meowSong:setLooping(true)
+meowSong:setVolume(0.3)
 rotateSound = love.audio.newSource("sounds/rotarpieza.wav", "static")
 matchSound = love.audio.newSource("sounds/match.wav", "static")
 timeStop = love.audio.newSource("sounds/timestop.mp3", "static")

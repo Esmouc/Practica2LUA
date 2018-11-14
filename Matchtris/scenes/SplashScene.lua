@@ -8,7 +8,7 @@ function SplashScene:Load()
   self.lObjects = {}
   self.c = 0
   -- GAME OBJECTS
-  self.background = GameObject({},Transform(w/2,h/2), SpriteRenderer(menuPath))
+  self.background = GameObject({},Transform(w/2,h/2), SpriteRenderer(splashPath))
   
   -- INSERTAMOS LOS OBJETOS A LA ESCENA
   table.insert (self.lObjects, self.background)

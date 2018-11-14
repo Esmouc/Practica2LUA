@@ -13,7 +13,6 @@ function LevelManager:new()
   self.arrowPressed = false
   self.tetromino = nil
   self:InitGrid()
-  
 end
 
 function LevelManager:update(dt, gameobject)

@@ -55,6 +55,10 @@ end
 
 function LevelScene:keypressed(key)
   self.levelManager:GetComponent(LevelManager):keypressed(key)
+  if key == "escape" then
+    changeState(GameStates.pause)
+  end
+  
 end
 
     

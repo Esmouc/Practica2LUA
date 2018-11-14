@@ -11,7 +11,7 @@ function LevelManager:new()
   self.arrowPressed = false
   self.tetromino = nil
   self:InitGrid()
-  matchtrisSong:play()
+  
 end
 
 function LevelManager:update(dt, gameobject)
@@ -380,6 +380,7 @@ function LevelManager:StackTetromino()
   end
   self.tetromino = nil
   self.levelState = LevelState.Stack
+  clackSound:play()
   currentScene.tetromino:destroy()
 end
 

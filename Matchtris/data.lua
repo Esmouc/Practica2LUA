@@ -36,8 +36,14 @@ botonesPath = {exit = "sprites/botones/exit.png" , mexit="sprites/botones/menuex
 matchtrisSong = love.audio.newSource("sounds/matchtrisong.wav", "static")
 matchtrisSong:setLooping(true)
 matchtrisSong:setVolume(0.3)
+
+meowSong = love.audio.newSource("sounds/meowtris.mp3", "static")
+meowSong:setLooping(true)
+meowSong:setVolume(0.2)
+
 rotateSound = love.audio.newSource("sounds/rotarpieza.wav", "static")
 matchSound = love.audio.newSource("sounds/match.wav", "static")
+clackSound = love.audio.newSource("sounds/clack.wav", "static")
 
 -- PIECES
 

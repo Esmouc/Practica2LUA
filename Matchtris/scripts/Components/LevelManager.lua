@@ -184,7 +184,7 @@ function LevelManager:keypressed(key)
     
     if key == "space" then
       timeStop:play()
-      matchtrisSong:play()
+      music:play()
       self.levelState = LevelState.Tetromino
       currentScene.powerUpManager:GetComponent(PowerUpManager).wait = false
       self:UpdateTimeStopPieces()

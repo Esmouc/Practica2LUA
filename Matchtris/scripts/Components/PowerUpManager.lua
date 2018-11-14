@@ -103,7 +103,7 @@ end
 
 function PowerUpManager:StopTime()--AMARILLO
   timeStop:play()
-  matchtrisSong:stop()
+  music:stop()
   local levelManager = currentScene.levelManager:GetComponent(LevelManager)
   levelManager.levelState = LevelState.TimeStop
 end

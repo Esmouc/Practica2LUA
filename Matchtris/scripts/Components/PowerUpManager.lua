@@ -81,6 +81,7 @@ function PowerUpManager:Demolish(gridRow, gridCol)--ROJO
       end
     end
   end
+  projo:play()
   levelManager:CalculatePoints(t)
   levelManager:StackTetromino()
 end
@@ -98,6 +99,7 @@ function PowerUpManager:RandomizeC(gridRow, gridCol)--AZUL
       end
     end
   end
+  pazul:play()
   levelManager:StackTetromino()
 end
 
@@ -116,6 +118,7 @@ function PowerUpManager:DestroyLine(gridRow)--VERDE
         table.insert(t,levelManager.grid[gridRow][c]:GetComponent(PieceScript))
       end
   end
+  pverde:play()
   levelManager:CalculatePoints(t)
   levelManager:StackTetromino()
 end
@@ -123,10 +126,11 @@ end
 function PowerUpManager:Worm()--NARANJA
   local levelManager = currentScene.levelManager:GetComponent(LevelManager)
   levelManager.levelState = LevelState.Worm
+  pnaranja:play()
   self.wait = true
 end
 
-function PowerUpManager:Mark(gridRow)--PURPURA(que lila no se usa en inglés
+function PowerUpManager:Mark(gridRow)--PURPURA(que lila no se usa en inglés) (jaja vale)
   local levelManager = currentScene.levelManager:GetComponent(LevelManager)
   for c = 1, gridCols,1 do
     if levelManager.grid[gridRow][c] ~= nil then
@@ -135,5 +139,6 @@ function PowerUpManager:Mark(gridRow)--PURPURA(que lila no se usa en inglés
       levelManager.grid[gridRow][c].spriteRenderer:changeImage(powerPiecesPaths[ps.color])
     end
   end
+  plila:play()
   levelManager:StackTetromino()
 end

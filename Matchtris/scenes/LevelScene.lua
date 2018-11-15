@@ -17,9 +17,9 @@ function LevelScene:Load()
   self.powerUpManager = GameObject({PowerUpManager(1)},Transform(w/2, h/2-self.background.spriteRenderer.origin.y+5), SpriteRenderer(powerBarPath[1]))
   
   --MENU PAUSA
-  self.exit = Button(self.Exit, 75, h * (2/3), font, "Exit")
-  self.volverB = Button(self.Resume, 75, h/3, font, "Resume")
-  self.menuB = Button(self.Menu, 75, h/2, font, "Menu")
+  self.exit = Button(self.Exit, 75, h/2.3 + 100, font, "Exit")
+  self.volverB = Button(self.Resume, 75, h/2.3 - 100, font, "Resume")
+  self.menuB = Button(self.Menu, 75, h/2.3, font, "Menu")
   
   -- UI
   
@@ -84,7 +84,7 @@ function LevelScene:keypressed(key)
   local lvManager = self.levelManager:GetComponent(LevelManager)
   lvManager:keypressed(key)
  
-  if key == "escape" then
+  if key == "escape" and lvManager.pause == false then
     music:stop()
     self:Pause()
     lvManager.pause = true

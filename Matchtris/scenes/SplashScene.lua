@@ -17,7 +17,7 @@ end
 
 function SplashScene:update(dt)
   
-  if self.c >= 1.0 then
+  if self.c >= 5.0 then
     changeState(GameStates.menu)
   else
     self.c= self.c + dt
@@ -37,5 +37,7 @@ function SplashScene:draw()
 end
 
 function SplashScene:keypressed(key)
-
+if key == "space" then
+    changeState(GameStates.menu)
+    end
 end

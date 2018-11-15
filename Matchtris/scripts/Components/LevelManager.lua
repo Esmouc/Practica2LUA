@@ -154,6 +154,7 @@ function LevelManager:update(dt, gameobject)
         self:UpdateTimeStopPieces()
         self.scrollTime = scrollTime
         self.scrolltimer = 0
+        pnaranja:play()
         self.wormCount = self.wormCount + 1
       else
         self.scrolltimer = self.scrolltimer + dt
@@ -194,7 +195,7 @@ function LevelManager:keypressed(key)
   if self.levelState == LevelState.TimeStop then
     
     if key == "space" then
-      timeStop:play()
+      timeStart:play()
       music:play()
       self.levelState = LevelState.Tetromino
       currentScene.powerUpManager:GetComponent(PowerUpManager).wait = false

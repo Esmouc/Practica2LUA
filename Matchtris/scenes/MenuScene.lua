@@ -10,9 +10,9 @@ function MenuScene:Load()
   self.ranking = false
   
   -- GAME OBJECTS
-  self.exit = Button(self.Exit, 75, h/1.8 + 100, font, "Exit")
-  self.playB = Button(self.Play, 75, h/1.8, font, "Matchtris")
-  self.playMB = Button(self.PlayMiau, 75, h/1.8 - 100, font, "Miautris")
+  self.exit = Button(self.Exit, 75, h/1.9 + 100, font, "Exit")
+  self.playB = Button(self.Play, 75, h/1.9 - 100, font, "Matchtris")
+  self.playMB = Button(self.PlayMiau, 75, h/1.9, font, "Meowtris")
   --self.rankingB = Button(self.Ranking, w/2, h/2, font, "Ranking")
   self.background = GameObject({},Transform(w/2,h/2), SpriteRenderer(menuPath))
   

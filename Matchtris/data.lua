@@ -19,8 +19,8 @@ pixelHeight = 30
 colors = {WHITE = {1,1,1,1}, GREY = {0.831, 0.831, 0.831, 1}, DARKGREY = {0.521, 0.521, 0.521,1}, BLACK = {0,0,0,1}, BLUE = {0.180,0.631,0.960,1}, RED = {1,0,0,1}}
 
 -- FONTS
-font = love.graphics.newFont("font/D-DIN-Bold.otf",50)
-smallfont = love.graphics.newFont("font/D-DIN-Bold.otf",30)
+font = love.graphics.newFont("font/Square.ttf",40)
+smallfont = love.graphics.newFont("font/Square.ttf",30)
 
 --TEXTURES
 barPath = "sprites/backgrounds/matchtrisBar.png"
@@ -42,9 +42,16 @@ miautrisSong = "sounds/miautris.wav"
 
 rotateSound = love.audio.newSource("sounds/rotarpieza.wav", "static")
 matchSound = love.audio.newSource("sounds/match.wav", "static")
+clackSound = love.audio.newSource("sounds/clack.wav", "static")
+
 timeStop = love.audio.newSource("sounds/timestop.mp3", "static")
 timeStart = love.audio.newSource("sounds/timestart.wav", "static")
-clackSound = love.audio.newSource("sounds/clack.wav", "static")
+projo = love.audio.newSource("sounds/projo.ogg", "static")
+pazul = love.audio.newSource("sounds/pazul.ogg", "static")
+pnaranja = love.audio.newSource("sounds/pnaranja.ogg", "static")
+plila = love.audio.newSource("sounds/plila.ogg", "static")
+pverde = love.audio.newSource("sounds/pverde.ogg", "static")
+
 
 -- PIECES
 

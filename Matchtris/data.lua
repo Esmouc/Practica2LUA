@@ -5,6 +5,8 @@ h = love.graphics.getHeight()
 fallTime = 1.0
 scrollTime = 0.05
 powerUpCooldown = 5
+rankingNFileName = "RankingNames.txt"
+rankingSFileName = "RankingScores.txt"
 
 -- GRID
 

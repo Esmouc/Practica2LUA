@@ -2,6 +2,7 @@ GameStates = {gameplay = 0, splash = 1, menu = 2, End = 3, ranking = 4}
 
 playerScore = 0
 gameScene = 0
+
 function love.load(arg)
   
   if arg[#arg] == "-debug" then require("mobdebug").start() end -- Enable the debugging with ZeroBrane Studio
@@ -95,4 +96,10 @@ end
 
 function love.keypressed(key)
    currentScene:keypressed(key)
+end
+
+function love.textinput(t)
+  if gameState == GameStates.ranking then
+    currentScene:textinput(t)
+  end
 end

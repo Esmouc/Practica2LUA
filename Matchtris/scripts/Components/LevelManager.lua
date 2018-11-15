@@ -247,7 +247,10 @@ function LevelManager:CalculatePoints(pieceArray)
     if count > 3 then
       multiplier = multiplier * 1.5
     end
-    self.grid[v.gridRow][v.gridCol]:destroy()
+    if self.grid[v.gridRow][v.gridCol] ~= nil then
+      self.grid[v.gridRow][v.gridCol]:destroy()
+    end
+    
     self.grid[v.gridRow][v.gridCol] = nil
   end
   auxScore = math.floor (auxScore * multiplier)

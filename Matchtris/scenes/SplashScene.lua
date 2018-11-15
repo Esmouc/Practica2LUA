@@ -17,7 +17,7 @@ end
 
 function SplashScene:update(dt)
   
-  if self.c >= 5.0 then
+  if self.c >= 10.0 then
     changeState(GameStates.menu)
   else
     self.c= self.c + dt

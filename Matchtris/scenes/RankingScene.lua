@@ -11,7 +11,7 @@ function RankingScene:Load()
   self.inputLetters = 0
   
   -- GAME OBJECTS
-  self.submit = Button(self.Submit, 75, h/2 +170, font, "Submit")
+  self.submit = Button(self.Submit, 75, h/2 +170, font, "Close")
   self.lbText = Text(w/2,50,-300,0,600,"center", font,"LEADERBOARD")
   -- NUMBERS
   self.one = Text(70,120,0,0,100,"left", smallfont,"1.")

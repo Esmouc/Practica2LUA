@@ -1,4 +1,4 @@
-GameStates = {gameplay = 0, splash = 1, menu = 2, End = 3, ranking = 4}
+GameStates = {gameplay = 0, splash = 1, menu = 2, skins = 3, ranking = 4}
 
 playerScore = 0
 gameScene = 0
@@ -16,7 +16,7 @@ function love.load(arg)
   
   -- SCENES
   require "scenes/LevelScene"
-  require "scenes/EndScene"
+  require "scenes/SkinScene"
   require "scenes/MenuScene"
   require "scenes/RankingScene"
   require "scenes/SplashScene"
@@ -80,9 +80,9 @@ function changeState(newState)
     gameState = GameStates.menu
     currentScene = MenuScene()
   end
-  if newState == GameStates.End then
-    gameState = GameStates.End
-    currentScene = EndScene()
+  if newState == GameStates.skins then
+    gameState = GameStates.skins
+    currentScene = SkinScene()
   end
   if newState == GameStates.ranking then
     gameState = GameStates.ranking

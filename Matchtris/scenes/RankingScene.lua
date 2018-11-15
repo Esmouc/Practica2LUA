@@ -192,6 +192,9 @@ function RankingScene:Submit()
   end
   
    success, message = love.filesystem.write(rankingNFileName, data)
+   
+  
+  playerScore = 0
   
   changeState(GameStates.menu)
   

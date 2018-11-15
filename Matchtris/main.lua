@@ -32,7 +32,6 @@ function love.load(arg)
   
   -- COMPONENTS
   require "scripts/Components/LevelManager"
-  require "scripts/Components/BarScript"
   require "scripts/Components/PieceScript"
   require "scripts/Components/TetrominoScript"
   require "scripts/Components/PowerUpManager"

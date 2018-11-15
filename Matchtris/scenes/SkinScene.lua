@@ -54,5 +54,5 @@ function SkinScene:PlayMiau()
 end
 
 function SkinScene:keypressed(key)
-
+if key == "escape" then changeState(GameStates.menu) end
 end

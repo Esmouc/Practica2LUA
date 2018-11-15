@@ -10,7 +10,6 @@ function LevelScene:Load()
 
   -- GAME OBJECTS
 
-  self.barManager = GameObject({BarScript()},Transform(), SpriteRenderer(barPath))
   self.background = GameObject({},Transform(w/2,h/2), SpriteRenderer(bgPath))
   self.foreGround = GameObject({},Transform(w/2,h/2), SpriteRenderer(fgPath))
   self.levelManager = GameObject({LevelManager()},Transform())

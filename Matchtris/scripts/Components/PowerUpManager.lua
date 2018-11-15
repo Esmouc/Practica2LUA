@@ -9,6 +9,7 @@ end
 function PowerUpManager:update(dt,gameobject)
   if self.wait == false then
   if self.cooldown >= self.MaxCooldown then
+    
     gameobject.transform.scale.x = 1.0
     if love.keyboard.isDown("space") then--Si le da a tecla sustituir  la pieza actual por esta
       if self.color == 1 then

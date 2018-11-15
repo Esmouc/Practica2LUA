@@ -12,6 +12,8 @@ function PowerUpManager:update(dt,gameobject)
   if self.cooldown >= self.MaxCooldown then
     if available == true then pbarra:play() available = false end
     gameobject.transform.scale.x = 1.0
+    local levelManager = currentScene.levelManager:GetComponent(LevelManager)
+    if levelManager.levelState == LevelState.Tetromino then
     if love.keyboard.isDown("space") then--Si le da a tecla sustituir  la pieza actual por esta
       if self.color == 1 then
         self:StopTime()
@@ -41,6 +43,7 @@ function PowerUpManager:update(dt,gameobject)
       end
       available = true
       self.cooldown = 0
+      end
     end
   else
     gameobject.transform.scale.y = 0.6

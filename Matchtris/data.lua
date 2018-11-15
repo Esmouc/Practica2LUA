@@ -38,7 +38,7 @@ pausePath = "sprites/backgrounds/matchtrisBGPAUSE.png"
 -- SOUNDS
 
 matchtrisSong = "sounds/matchtrisong.wav"
-miautrisSong = "sounds/miautris.wav"
+miautrisSong = "sounds/meowtris.mp3"
 
 rotateSound = love.audio.newSource("sounds/rotarpieza.wav", "static")
 matchSound = love.audio.newSource("sounds/match.wav", "static")

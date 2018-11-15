@@ -391,6 +391,9 @@ function LevelManager:UpdateTetrominoPieces()
     for c,t in ipairs(v) do
       if t ~= 0 then
         ps = self.tetromino.grid[r][c]:GetComponent(PieceScript)
+        if self.grid[ps.gridRow][ps.gridCol] ~= nil then
+          self.grid[ps.gridRow][ps.gridCol]:destroy()
+        end
         self.grid[ps.gridRow][ps.gridCol] = self.tetromino.grid[r][c]
       end
     end

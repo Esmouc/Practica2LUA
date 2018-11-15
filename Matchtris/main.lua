@@ -1,5 +1,7 @@
 GameStates = {gameplay = 0, splash = 1, menu = 2, skins = 3, ranking = 4}
+SkinSelected = {Normal = 0, Cats = 1}
 
+skinSelected = SkinSelected.Normal
 playerScore = 0
 gameScene = 0
 

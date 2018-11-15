@@ -42,6 +42,7 @@ function SkinScene:Play()
   bgPath = matchbgPath
   powerPiecesPaths = normalPowerPiecesPaths
   songSelect = matchtrisSong
+  skinSelected = SkinSelected.Normal
   changeState(GameStates.gameplay)
 end
 function SkinScene:PlayMiau()
@@ -50,6 +51,7 @@ function SkinScene:PlayMiau()
   bgPath = miaubgPath
   powerPiecesPaths = miauPowerPiecesPaths
   songSelect = miautrisSong
+  skinSelected = SkinSelected.Cats
   changeState(GameStates.gameplay)
 end
 

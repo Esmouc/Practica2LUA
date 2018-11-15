@@ -139,6 +139,11 @@ function TetrominoScript:Rotate()
       break
     end
   end
+  
+  if initCol > gridCols - row + 1 then initCol = gridCols - row + 1 end
+  if initCol < 1 then initCol = 1 end
+  if initRow < 1 then initRow = 1 end
+  if initRow > gridRows + 2 - col +1 then initRow = gridRows + 2 -col +1 end
 
   local newGrid = {}
   
@@ -152,14 +157,16 @@ function TetrominoScript:Rotate()
   
   self.grid = newGrid
   
+  local up,left,right = 0,0,0
+  
   for r,v in ipairs(self.grid) do
     for c,t in ipairs(v) do
       if t ~= 0 then
         ps = self.grid[r][c]:GetComponent(PieceScript)
-        ps.gridRow = initRow + r
+        ps.gridRow = initRow + r - 1
         ps.gridCol = initCol + c - 1
-        self.grid[r][c].transform.position.y = (h/2 - currentScene.background.spriteRenderer.origin.y-1.5*pixelHeight) + (r-1+initRow) * pixelHeight
-        self.grid[r][c].transform.position.x = (w/2 - currentScene.background.spriteRenderer.origin.x - pixelWidth * 0.5) + (c-1+initCol) * pixelWidth 
+        self.grid[r][c].transform.position.y = (h/2 - currentScene.background.spriteRenderer.origin.y-1.5*pixelHeight) + (ps.gridRow-1) * pixelHeight
+        self.grid[r][c].transform.position.x = (w/2 - currentScene.background.spriteRenderer.origin.x - pixelWidth * 0.5) + (ps.gridCol) * pixelWidth
       end
     end
   end

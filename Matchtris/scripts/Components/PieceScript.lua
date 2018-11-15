@@ -7,10 +7,27 @@ function PieceScript:new(color)
   self.gridCol = 0
   self.stacked = false
   self.moving = false
+  self.smiling = false
+  self.timer = 0
   self.stackedBrothers = {self}
 end
 
 function PieceScript:update(dt, gameobject)
+
+  if skinSelected == SkinSelected.Cats and self.smiling == false then
+    if math.random(0,1000) == 0 then
+      gameobject.spriteRenderer:changeImage(catSmilesPath[self.color])
+      self.smiling = true
+    end
+  end
+  
+  if self.smiling == true then
+    self.timer = self.timer + dt
+    if self.timer >= 0.7 then
+       gameobject.spriteRenderer:changeImage(piecesPaths[self.color])
+       self.smiling = false
+    end
+  end
 
 end
 

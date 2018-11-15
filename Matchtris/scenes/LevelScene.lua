@@ -13,8 +13,9 @@ function LevelScene:Load()
   self.background = GameObject({},Transform(w/2,h/2), SpriteRenderer(bgPath))
   self.foreGround = GameObject({},Transform(w/2,h/2), SpriteRenderer(fgPath))
   self.levelManager = GameObject({LevelManager()},Transform())
-  self.powerUpManager = GameObject({PowerUpManager(1)},Transform(w/2, h/2-self.background.spriteRenderer.origin.y+5), SpriteRenderer(powerBarPath[1]))
-  
+  self.powerUpManager = GameObject({PowerUpManager(1)},Transform(w/2, h/2-self.background.spriteRenderer.origin.y-4), SpriteRenderer(powerBarPath[1]))
+  self.pressSpace = GameObject({},Transform(w/4.3,h/16), SpriteRenderer(spacePath))
+ 
   --MENU PAUSA
   self.exit = Button(self.Exit, 75, h/2.3 + 100, font, "Exit")
   self.volverB = Button(self.Resume, 75, h/2.3 - 100, font, "Resume")
@@ -37,6 +38,7 @@ function LevelScene:Load()
   table.insert (self.lObjects, self.foreGround)
   table.insert (self.lObjects, self.levelManager)
   table.insert (self.lObjects, self.playerScore)
+  --table.insert (self.lObjects, self.pressSpace)
   
   self.levelManager:GetComponent(LevelManager):TetrominoSpawn()
   
@@ -56,6 +58,8 @@ function LevelScene:draw()
   for _,v in pairs(self.lObjects) do
     v:draw()
   end
+  
+  if available == false then self.pressSpace:draw() end
   
 end
 

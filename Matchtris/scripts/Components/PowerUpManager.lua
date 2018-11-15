@@ -5,11 +5,12 @@ function PowerUpManager:new(color)
   self.MaxCooldown = powerUpCooldown
   self.cooldown = 0
   self.wait = false
+  available = true
 end
 function PowerUpManager:update(dt,gameobject)
   if self.wait == false then
   if self.cooldown >= self.MaxCooldown then
-    
+    if available == true then pbarra:play() available = false end
     gameobject.transform.scale.x = 1.0
     if love.keyboard.isDown("space") then--Si le da a tecla sustituir  la pieza actual por esta
       if self.color == 1 then
@@ -37,10 +38,11 @@ function PowerUpManager:update(dt,gameobject)
         levelManager:UpdateTetrominoPieces()
         
       end
+      available = true
       self.cooldown = 0
     end
   else
-    gameobject.transform.scale.y = 0.5
+    gameobject.transform.scale.y = 0.6
     gameobject.transform.scale.x = self.cooldown/self.MaxCooldown
     self.cooldown = self.cooldown + dt
   end
@@ -143,3 +145,5 @@ function PowerUpManager:Mark(gridRow)--PURPURA(que lila no se usa en inglés) (j
   plila:play()
   levelManager:StackTetromino()
 end
+
+

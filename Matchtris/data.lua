@@ -4,7 +4,7 @@ h = love.graphics.getHeight()
 -- DATA
 fallTime = 1.0
 scrollTime = 0.05
-powerUpCooldown = 30
+powerUpCooldown = 1
 rankingNFileName = "RankingNames.txt"
 rankingSFileName = "RankingScores.txt"
 
@@ -24,6 +24,7 @@ smallfont = love.graphics.newFont("font/Square.ttf",30)
 
 --TEXTURES
 barPath = "sprites/backgrounds/matchtrisBar.png"
+spacePath = "sprites/powerups/pressspace.png"
 bgPath = 0
 matchbgPath="sprites/backgrounds/matchtrisBGBACK.png"
 miaubgPath = "sprites/backgrounds/miautrisBGBACK.png"
@@ -52,6 +53,7 @@ pazul = love.audio.newSource("sounds/pazul.ogg", "static")
 pnaranja = love.audio.newSource("sounds/pnaranja.ogg", "static")
 plila = love.audio.newSource("sounds/plila.ogg", "static")
 pverde = love.audio.newSource("sounds/pverde.ogg", "static")
+pbarra = love.audio.newSource("sounds/pbarra.ogg", "static")
 
 -- PIECES
 

@@ -78,6 +78,7 @@ end
 
 function PowerUpManager:Demolish(gridRow, gridCol)--ROJO
   local levelManager = currentScene.levelManager:GetComponent(LevelManager)
+  levelManager.pause = true
   local t = {}
   for r = gridRow -1, gridRow +1,1 do
     for c = gridCol -1, gridCol+1,1 do
@@ -90,7 +91,10 @@ function PowerUpManager:Demolish(gridRow, gridCol)--ROJO
   end
   projo:play()
   levelManager:CalculatePoints(t)
-  levelManager:StackTetromino()
+  if t == {} then
+    levelManager.pause = false
+  end
+  --levelManager:StackTetromino()
 end
 
 function PowerUpManager:RandomizeC(gridRow, gridCol)--AZUL
@@ -119,6 +123,7 @@ end
 
 function PowerUpManager:DestroyLine(gridRow)--VERDE
   local levelManager = currentScene.levelManager:GetComponent(LevelManager)
+  levelManager.pause = true
   local t = {}
   for c = 1, gridCols,1 do
       if levelManager.grid[gridRow][c] ~= nil then
@@ -127,7 +132,10 @@ function PowerUpManager:DestroyLine(gridRow)--VERDE
   end
   pverde:play()
   levelManager:CalculatePoints(t)
-  levelManager:StackTetromino()
+   if t == {} then
+    levelManager.pause = false
+  end
+  --levelManager:StackTetromino()
 end
 
 function PowerUpManager:Worm()--NARANJA

@@ -48,7 +48,7 @@ function PieceScript:update(dt, gameobject)
       local levelManager = currentScene.levelManager:GetComponent(LevelManager)
       levelManager.grid[self.gridRow][self.gridCol] = nil
       if levelManager.levelState ~= LevelState.Stack and levelManager.pause == true then
-        currentScene.levelManager:GetComponent(LevelManager).levelState = LevelState.Stack
+        currentScene.levelManager:GetComponent(LevelManager):StackTetromino()
         currentScene.levelManager:GetComponent(LevelManager).pause = false
       end
     end

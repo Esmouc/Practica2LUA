@@ -4,7 +4,7 @@ h = love.graphics.getHeight()
 -- DATA
 fallTime = 1.0
 scrollTime = 0.05
-powerUpCooldown = 5
+powerUpCooldown = 30
 rankingNFileName = "RankingNames.txt"
 rankingSFileName = "RankingScores.txt"
 

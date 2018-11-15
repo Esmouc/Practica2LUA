@@ -8,6 +8,7 @@ function PieceScript:new(color)
   self.stacked = false
   self.moving = false
   self.smiling = false
+  self.fadeOut = false
   self.timer = 0
   self.stackedBrothers = {self}
 end
@@ -15,8 +16,12 @@ end
 function PieceScript:update(dt, gameobject)
 
   if skinSelected == SkinSelected.Cats and self.smiling == false then
-    if math.random(0,1000) == 0 then
-      gameobject.spriteRenderer:changeImage(catSmilesPath[self.color])
+    if math.random(0,100) == 0 then
+      if self.multiplier == 1.0 then
+        gameobject.spriteRenderer:changeImage(catSmilesPath[self.color])
+      else
+        gameobject.spriteRenderer:changeImage(catSmilesPowerPath[self.color])
+      end
       self.smiling = true
     end
   end
@@ -24,8 +29,28 @@ function PieceScript:update(dt, gameobject)
   if self.smiling == true then
     self.timer = self.timer + dt
     if self.timer >= 0.7 then
-       gameobject.spriteRenderer:changeImage(piecesPaths[self.color])
+      if self.multiplier == 1.0 then
+        gameobject.spriteRenderer:changeImage(piecesPaths[self.color])
+      else
+        gameobject.spriteRenderer:changeImage(powerPiecesPaths[self.color])
+      end
        self.smiling = false
+       self.timer = 0
+    end
+  end
+  
+  if self.fadeOut == true then
+    gameobject.transform.scale.x = gameobject.transform.scale.x - 2*dt
+    gameobject.transform.scale.y = gameobject.transform.scale.y - 2*dt
+    
+    if gameobject.transform.scale.x <= 0 then
+      gameobject:destroy()
+      local levelManager = currentScene.levelManager:GetComponent(LevelManager)
+      levelManager.grid[self.gridRow][self.gridCol] = nil
+      if levelManager.levelState ~= LevelState.Stack and levelManager.pause == true then
+        currentScene.levelManager:GetComponent(LevelManager).levelState = LevelState.Stack
+        currentScene.levelManager:GetComponent(LevelManager).pause = false
+      end
     end
   end
 

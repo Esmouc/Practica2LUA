@@ -4,7 +4,7 @@ h = love.graphics.getHeight()
 -- DATA
 fallTime = 1.0
 scrollTime = 0.05
-powerUpCooldown = 1
+powerUpCooldown = 40
 rankingNFileName = "RankingNames.txt"
 rankingSFileName = "RankingScores.txt"
 
@@ -68,6 +68,7 @@ miauPowerPiecesPaths = {"sprites/piezas/gatitoamarilloplus.png","sprites/piezas/
 powerBarPath = {"sprites/powerups/barraamarilla.png","sprites/powerups/barraazul.png","sprites/powerups/barralila.png","sprites/powerups/barranaranja.png", "sprites/powerups/barraroja.png","sprites/powerups/barraverde.png"}
 
 catSmilesPath = {"sprites/piezas/risa2.png","sprites/piezas/risa5.png","sprites/piezas/risa3.png","sprites/piezas/risa1.png", "sprites/piezas/risa6.png","sprites/piezas/risa4.png"}
+catSmilesPowerPath = {"sprites/piezas/risa2+.png","sprites/piezas/risa5+.png","sprites/piezas/risa3+.png","sprites/piezas/risa1+.png", "sprites/piezas/risa6+.png","sprites/piezas/risa4+.png"}
 
 --TETROMINOS GRIDS
 

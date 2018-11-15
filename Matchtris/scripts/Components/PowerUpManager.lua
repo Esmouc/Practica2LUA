@@ -32,6 +32,7 @@ function PowerUpManager:update(dt,gameobject)
         local pieceScript = levelManager.tetromino.grid[1][1]:GetComponent(PieceScript)
         
         pieceScript.color = self.color
+        pieceScript.multiplier = 1.5
         pieceScript.gridRow, pieceScript.gridCol = gridX+1, gridY
         levelManager.tetromino.grid[1][1].spriteRenderer:changeImage(powerPiecesPaths[self.color])
 

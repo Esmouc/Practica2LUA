@@ -232,7 +232,7 @@ function LevelManager:CheckMatches()
     end  
   end
   
-  if match then self.levelState = LevelState.Stack else self:TetrominoSpawn() end
+  if match then self.pause = true else self:TetrominoSpawn() end
   if match then matchSound:play() end
   
 end
@@ -249,10 +249,9 @@ function LevelManager:CalculatePoints(pieceArray)
       multiplier = multiplier * 1.5
     end
     if self.grid[v.gridRow][v.gridCol] ~= nil then
-      self.grid[v.gridRow][v.gridCol]:destroy()
+      self.grid[v.gridRow][v.gridCol]:GetComponent(PieceScript).fadeOut = true
+      self.grid[v.gridRow][v.gridCol] = nil
     end
-    
-    self.grid[v.gridRow][v.gridCol] = nil
   end
   auxScore = math.floor (auxScore * multiplier)
   playerScore = playerScore + auxScore
